@@ -1,6 +1,4 @@
 import app from "@adonisjs/core/services/app"
+import { PrismaClient } from "@prisma/client/extension"
 
-export async function Prisma(){
-    const prisma = await app.container.make('prisma:db')
-    return prisma
-}
+export const main_db: PrismaClient = async ()=> await app.container.make('prisma:db')

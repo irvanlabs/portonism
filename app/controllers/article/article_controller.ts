@@ -1,10 +1,10 @@
-import { BlogService } from '#services/blog/article_service';
+import { BlogService } from '#services/article/article_service';
 import { createArticleValidator, updateArticleValidator } from '#validators/article';
 import type { HttpContext } from '@adonisjs/core/http'
 import { inject } from '@adonisjs/fold';
 
 @inject()
-export default class BlogController {
+export default class ArticleController {
     constructor(
         private blogService: BlogService
     ){}

@@ -10,7 +10,10 @@ export default defineConfig({
   | will be scanned automatically from the "./commands" directory.
   |
   */
-  commands: [() => import('@adonisjs/core/commands'), () => import('@arthurfranckpat/adonis-prisma/commands')],
+  commands: [
+    () => import('@adonisjs/core/commands'),
+    () => import('@adonisjs/lucid/commands')
+  ],
 
   /*
   |--------------------------------------------------------------------------
@@ -30,7 +33,7 @@ export default defineConfig({
     },
     () => import('@adonisjs/core/providers/vinejs_provider'),
     () => import('@adonisjs/cors/cors_provider'),
-    () => import('@arthurfranckpat/adonis-prisma/prisma_provider')
+    () => import('@adonisjs/lucid/database_provider')
   ],
 
   /*
@@ -41,7 +44,7 @@ export default defineConfig({
   | List of modules to import before starting the application.
   |
   */
-  preloads: [() => import('./app/routes/routes.js'), () => import('#start/kernel')],
+  preloads: [() => import('./start/routes.js'), () => import('#start/kernel')],
 
   /*
   |--------------------------------------------------------------------------

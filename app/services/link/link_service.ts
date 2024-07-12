@@ -1,11 +1,8 @@
 import _ from 'lodash'
-import app from '@adonisjs/core/services/app'
-import { PrismaClient } from '@prisma/client/extension'
 import * as crypto from 'crypto';
 import { customAlphabet } from 'nanoid'
 import { NotFoundException, UnauthorizedException } from '#exceptions/exceptions';
-
-const prisma: PrismaClient = await app.container.make('prisma:db')
+import Shortlink from '#models/shortlink';
 
 export default class LinkService{
     async index(){
@@ -21,16 +18,15 @@ export default class LinkService{
     
     async duplicatePrevention(slug: string, url: string,){
         const slugs = _.shuffle(slug.split('')).join('');
-        const link = await prisma.shortlink.create({
-            data: {slug: slugs, url}
+        const link = await Shortlink.create({
+            slug: slugs, 
+            url: url,
         })
         return link
     }
     
-    async checkSlug(slug){
-        const link = await prisma.shortlink.findFirst({
-            where: {slug: slug}
-        })
+    async checkSlug(slug: string){
+        const link = await Shortlink.findBy('slug', slug)
         return link
     }
     
@@ -43,8 +39,12 @@ export default class LinkService{
             slug = (nanoid().toString())+(this.generateRandomString())
         }
         try {
-            const link = await prisma.shortlink.create({
-                data: {slug, url}
+            const link = await Shortlink.firstOrCreate({
+                slug: slug
+            },
+            {
+                slug: slug,
+                url: url,
             })
             return link;
         } catch (error) {
@@ -54,9 +54,7 @@ export default class LinkService{
 
     async getShortlink(slug: string){
         // console.log(slug)
-        let result = await prisma.shortlink.findUnique({
-            where: {slug: slug}
-        });
+        let result = await Shortlink.findByOrFail('slug', slug);
         if(!result){
             throw new NotFoundException(`No shortlink found`)
         }

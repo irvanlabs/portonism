@@ -7,6 +7,7 @@ export const createArticleValidator = vine.compile(
         content: vine.string(),
         slug: vine.string().nullable(),
         published: vine.boolean().nullable(),
+        categories: vine.array(vine.number()).notEmpty(),
     })
 );
 
@@ -16,5 +17,6 @@ export const updateArticleValidator = vine.compile(
         title: vine.string().trim().nullable(),
         content: vine.string().nullable(),
         published: vine.boolean().nullable(),
+        categories: vine.array(vine.number()).nullable(),
     })
 );
