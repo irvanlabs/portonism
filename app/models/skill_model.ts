@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import User from './user.js'
+import User from './user_model.js'
 
 
 export enum SkillLevel{
@@ -12,6 +12,8 @@ export enum SkillLevel{
   EXPERT = 'Expert' // ahli
 }
 export default class Skill extends BaseModel {
+  static table = 'skills';
+
   @column({ isPrimary: true })
   declare id: number
 

@@ -1,16 +1,18 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column, hasMany } from '@adonisjs/lucid/orm'
-import Role from './role.js'
+import Role from './role_model.js'
 import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
-import UserPlan from './user_plan.js'
-import Article from './article.js'
-import Profile from './profile.js'
-import Project from './project.js'
-import Skill from './skill.js'
-import Experience from './experience.js'
-import Education from './education.js'
+import UserPlan from './user_plan_model.js'
+import Article from './article_model.js'
+import Profile from './profile_model.js'
+import Project from './project_model.js'
+import Skill from './skill_model.js'
+import Experience from './experience_model.js'
+import Education from './education_model.js'
 
 export default class User extends BaseModel {
+  static table = 'users';
+
   @column({ isPrimary: true })
   declare id: number
 

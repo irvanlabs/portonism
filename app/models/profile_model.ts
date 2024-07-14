@@ -1,26 +1,31 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import User from './user.js'
+import User from './user_model.js'
 
-export default class Project extends BaseModel {
+export default class Profile extends BaseModel {
+  static table = 'profiles';
+
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare title: string
-
-  @column()
-  declare description: string
-
-  @column()
-  declare url?: string
-
-  @column()
-  declare imageUrl?: string
-
-  @column()
   declare userId: number
+
+  @column()
+  declare bio?: string
+
+  @column()
+  declare profilePic?: string
+
+  @column()
+  declare twitterUrl?: string
+
+  @column()
+  declare linkedInUrl?: string
+
+  @column()
+  declare githubUrl?: string
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>

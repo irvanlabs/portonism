@@ -1,7 +1,7 @@
 import { CreateUserDTO } from "./user_dto.js"
 import { BadRequestException } from "#exceptions/exceptions"
 import hash from '@adonisjs/core/services/hash'
-import User from "#models/user"
+import User from "#models/user_model"
 
 export default class UserService{
     async getUser(email){

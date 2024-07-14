@@ -1,4 +1,4 @@
-import Role from '#models/role'
+import Role from '#models/role_model'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 
 export default class extends BaseSeeder {

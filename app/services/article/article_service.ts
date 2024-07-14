@@ -1,7 +1,7 @@
 import { CreateArticleDto, UpdateArticleDto } from "./article_dto.js";
 import _ from "lodash";
 import { BadRequestException, NotFoundException } from "#exceptions/exceptions";
-import Article from "#models/article";
+import Article from "#models/article_model";
 
 
 export class BlogService{
@@ -43,8 +43,8 @@ export class BlogService{
                 published: data.published || true,
             })
 
-            if(data.category && data.category.length>0){
-                await article.related('categories').attach(data.category)
+            if(data.categories && data.categories.length > 0){
+                await article.related('categories').attach(data.categories)
             }
             return article
         } catch (error) {

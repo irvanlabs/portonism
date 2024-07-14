@@ -2,7 +2,7 @@ import { UnauthorizedException } from "#exceptions/exceptions"
 import { LoginUserDTO } from "#services/user/user_dto"
 import jwt from 'jsonwebtoken'
 import hash from '@adonisjs/core/services/hash'
-import User from "#models/user"
+import User from "#models/user_model"
 
 export class AuthService {
     async login(data: LoginUserDTO) {

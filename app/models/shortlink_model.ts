@@ -1,25 +1,29 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
-import User from './user.js'
+import User from './user_model.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import Plan from './plan.js'
 
-export default class UserPlan extends BaseModel {
+export default class Shortlink extends BaseModel {
+  static table = 'shortlinks';
+
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare userId: number
+  declare uuid: string
 
   @column()
-  declare planId: number
+  declare slug: string
+
+  @column()
+  declare url: string
+
+  @column()
+  declare userId: number
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
 
-  @belongsTo(() => Plan)
-  declare plan: BelongsTo<typeof Plan>
-  
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

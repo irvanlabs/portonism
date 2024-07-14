@@ -2,7 +2,7 @@ import _ from 'lodash'
 import * as crypto from 'crypto';
 import { customAlphabet } from 'nanoid'
 import { NotFoundException, UnauthorizedException } from '#exceptions/exceptions';
-import Shortlink from '#models/shortlink';
+import Shortlink from '#models/shortlink_model';
 
 export default class LinkService{
     async index(){

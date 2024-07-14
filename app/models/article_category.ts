@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
-import Article from './article.js'
+import Article from './article_model.js'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
 
 export default class ArticleCategory extends BaseModel {

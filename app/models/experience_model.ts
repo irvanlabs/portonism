@@ -1,20 +1,18 @@
 import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import User from './user.js'
+import User from './user_model.js'
 
-export default class Education extends BaseModel {
+export default class Experience extends BaseModel {
+  static table = 'experiences';
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare institution: string
+  declare company: string
 
   @column()
-  declare degree: string
-
-  @column()
-  declare field: string
+  declare position: string
 
   @column()
   declare startDate: DateTime
@@ -23,11 +21,13 @@ export default class Education extends BaseModel {
   declare endDate?: DateTime
 
   @column()
+  declare description: string
+
+  @column()
   declare userId: number
 
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
-
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
