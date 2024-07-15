@@ -31,6 +31,9 @@ export default class User extends BaseModel {
   @column()
   declare roleId: number
 
+  @column()
+  declare uuid: string
+
   @belongsTo(() => Role)
   declare role: BelongsTo<typeof Role>
 

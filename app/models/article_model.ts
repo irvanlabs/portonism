@@ -5,6 +5,8 @@ import User from './user_model.js'
 import ArticleCategory from './article_category.js'
 
 export default class Article extends BaseModel {
+  static table = 'articles'
+
   @column({ isPrimary: true })
   declare id: number
 
@@ -27,7 +29,7 @@ export default class Article extends BaseModel {
   declare author: BelongsTo<typeof User>
 
   @manyToMany(() => ArticleCategory, {
-    pivotTable: 'article_categories',
+    pivotTable: 'article_category_article',
     localKey: 'id',
     pivotForeignKey: 'article_id',
     relatedKey: 'id',

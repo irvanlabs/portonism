@@ -5,7 +5,8 @@ import router from "@adonisjs/core/services/router"
   // USER Education routes
 export const EducationRoutes = () =>{
     router.group(()=>{
-        router.get('/my', [EducationsController, 'getUserEducation']).use(middleware.auth())
+        router.get('/u/:uuid', [EducationsController, 'getUserEducation']).use(middleware.auth())
+        router.get('/my', [EducationsController, 'getMyEducation']).use(middleware.auth())
         router.post('/create', [EducationsController, 'create']).use(middleware.auth())
         router.put('/update/:id', [EducationsController, 'update']).use(middleware.auth())
         router.delete('/delete/:id', [EducationsController, 'delete']).use(middleware.auth())

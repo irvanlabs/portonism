@@ -59,6 +59,7 @@
     "@adonisjs/lucid": "^21.1.0",
     "@types/lodash": "^4.17.6",
     "@types/nanoid": "^3.0.0",
+    "@types/uuid": "^10.0.0",
     "@vinejs/vine": "^2.1.0",
     "argon2": "^0.40.3",
     "bcrypt": "^5.1.1",
@@ -66,7 +67,8 @@
     "luxon": "^3.4.4",
     "nanoid": "^5.0.7",
     "pg": "^8.12.0",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^10.0.0"
   },
   "hotHook": {
     "boundaries": [

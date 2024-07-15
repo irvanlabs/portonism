@@ -16,7 +16,7 @@ export const UpdateEducationValidator = vine.compile(
         institution: vine.string().optional(),
         degree: vine.string().trim().optional(),
         field: vine.string().trim().optional(),
-        startDate: vine.date().optional(),
-        endDate: vine.date().optional(),
+        startDate: vine.string().optional(),
+        endDate: vine.string().optional(),
     })
 )

@@ -14,6 +14,7 @@ import { AuthRoutes } from '../app/routes/auth_routes.js';
 import { ArticleRoutes } from '../app/routes/article_routes.js';
 import HealthChecksController from '#controllers/utils/health_checks_controller';
 import { EducationRoutes } from '../app/routes/education_routes.js';
+import { SkillRoutes } from '../app/routes/skill_routes.js';
 
 router.get('/', async () => {
   return {
@@ -29,4 +30,5 @@ router.group(()=>{
   AuthRoutes();
   ArticleRoutes();
   EducationRoutes();
+  SkillRoutes();
 }).prefix('/api');

@@ -6,7 +6,7 @@ import Article from "#models/article_model";
 
 export class BlogService{
     async getAllArticles(){
-        let article = await Article.findBy({published: true})
+        let article = await Article.findManyBy({published: true})
         return article
     }
 
@@ -48,6 +48,7 @@ export class BlogService{
             }
             return article
         } catch (error) {
+            console.error(error)
             throw new BadRequestException(error)
         }
     }
@@ -71,7 +72,7 @@ export class BlogService{
 
     async deleteBlogArticle(id: number, user_id: any){
         try{
-            let article = await Article.findByOrFail({id: id, user_id: user_id})
+            let article = await Article.findByOrFail({id: id, author_id: user_id})
             await article.delete()
             return article
         } catch (err){

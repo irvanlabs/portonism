@@ -17,9 +17,14 @@ export default class EducationsController {
         return await this.educationService.createEducation(user_id,data)
     }
 
-    async getUserEducation({request}: HttpContext){
+    async getMyEducation({request}: HttpContext){
         let user_id = request['user'].id
-        return await this.educationService.getUserEducation(user_id)
+        return await this.educationService.getMyEducation(user_id)
+    }
+
+    async getUserEducation({request}: HttpContext){
+        let userUUID = request.param('uuid')
+        return await this.educationService.getUserEducation(userUUID)
     }
 
     async update({request}: HttpContext){
