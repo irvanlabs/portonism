@@ -1,22 +1,22 @@
-import { UnauthorizedException } from "#exceptions/exceptions"
 import { LoginUserDTO } from "#services/user/user_dto"
 import jwt from 'jsonwebtoken'
-import hash from '@adonisjs/core/services/hash'
-import User from "#models/user_model"
+import { inject } from "@adonisjs/core"
+import UserService from "#services/user/user_service"
 
+@inject()
 export class AuthService {
+
+  constructor(
+    private userService: UserService
+  ){}
+
     async login(data: LoginUserDTO) {
-        const users = await User.query().preload('role').where('email', data.email).first()
-        if (!users) {
-          throw new UnauthorizedException('Invalid credentials');
-        }
-        const passwordValidation = await hash.verify(users.password, data.password)
-        if (!passwordValidation) {
-          throw new UnauthorizedException('Invalid credentials');
-        }
-      
-        const roles = users.role.name
-        const token = await jwt.sign({ id: users.id, email: users.email, roleId: users.roleId, roles: roles}, process.env.JWT_SECRET_KEY, { expiresIn: '1h', algorithm: 'HS256' });
+        let payload = await this.userService.authLogin(data)
+
+        const token = await jwt.sign(
+          payload, 
+          process.env.JWT_SECRET_KEY, 
+          { expiresIn: '1h', algorithm: 'HS256' });
       
         return { token };
     }

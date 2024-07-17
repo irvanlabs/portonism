@@ -1,5 +1,3 @@
-import { DateTime } from "luxon";
-
 export class CreateEducationDTO {
     institution!: string;
     degree!: string;

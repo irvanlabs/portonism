@@ -2,10 +2,9 @@ import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import User from './user_model.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
-import Plan from './plan_model.js'
 
-export default class UserPlan extends BaseModel {
-  static table = 'user_plans';
+export default class EmailVerification extends BaseModel {
+  static table = 'email_verifications';
 
   @column({ isPrimary: true })
   declare id: number
@@ -14,17 +13,17 @@ export default class UserPlan extends BaseModel {
   declare userId: number
 
   @column()
-  declare planId: number
+  declare token: string
+  
+  @column()
+  declare expiresAt: DateTime
 
   @column()
-  declare expiredAt: DateTime
+  declare isVerified: boolean
 
-  @belongsTo(() => User)
+  @belongsTo(()=> User)
   declare user: BelongsTo<typeof User>
 
-  @belongsTo(() => Plan)
-  declare plan: BelongsTo<typeof Plan>
-  
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

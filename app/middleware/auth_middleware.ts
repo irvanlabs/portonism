@@ -16,7 +16,7 @@ export default class AuthMiddleware {
     const token = authorizationHeader.replace('Bearer ', '');
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-      ctx.request['user'] = decoded;
+      ctx.request.user = decoded;
       await next();
     } catch (e) {
       throw new UnauthorizedException('Unauthorized')

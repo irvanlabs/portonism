@@ -32,6 +32,15 @@ export default class User extends BaseModel {
   declare roleId: number
 
   @column()
+  declare phoneNumber: string
+
+  @column()
+  declare isEmailVerified: boolean
+
+  @column()
+  declare isPhoneVerified: boolean
+
+  @column()
   declare uuid: string
 
   @belongsTo(() => Role)

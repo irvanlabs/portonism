@@ -9,7 +9,7 @@ export default class CheckAuthorizationMiddleware {
      */
     const authorizationHeader = ctx.request.headers().authorization;
     if (!authorizationHeader || !authorizationHeader.startsWith('Bearer ')) {
-      ctx.request['user'] = null;
+      ctx.request.user = null;
       await next();
       return;
     }
@@ -17,10 +17,10 @@ export default class CheckAuthorizationMiddleware {
     const token = authorizationHeader.replace('Bearer ', '');
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-      ctx.request['user'] = decoded;
+      ctx.request.user = decoded;
       await next();
     } catch (e) {
-      ctx.request['user'] = null;
+      ctx.request.user = null;
       await next();
     }
   }

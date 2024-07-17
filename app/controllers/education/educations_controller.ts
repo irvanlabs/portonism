@@ -13,12 +13,12 @@ export default class EducationsController {
 
     async create({request}: HttpContext){
         let data = await request.validateUsing(CreateEducationValidator)
-        let user_id = request['user'].id 
+        let user_id = request.user.id 
         return await this.educationService.createEducation(user_id,data)
     }
 
     async getMyEducation({request}: HttpContext){
-        let user_id = request['user'].id
+        let user_id = request.user.id
         return await this.educationService.getMyEducation(user_id)
     }
 
@@ -29,13 +29,13 @@ export default class EducationsController {
 
     async update({request}: HttpContext){
         let data = await request.validateUsing(UpdateEducationValidator)
-        let user_id = request['user'].id
+        let user_id = request.user.id
         let id =  request.param('id')
         return await this.educationService.updateEducation(user_id, id, data)
     }
 
     async delete({request}: HttpContext){
-        let user_id = request['user'].id
+        let user_id = request.user.id
         let id = request.param('id')
         return await this.educationService.deleteEducation(user_id, id)
     }

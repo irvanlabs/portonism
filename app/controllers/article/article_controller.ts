@@ -18,7 +18,7 @@ export default class ArticleController {
     }
 
     async createBlogArticle({request}: HttpContext){
-        const user = request['user']
+        const user = request.user
         const data = await request.validateUsing(createArticleValidator)
         return await this.blogService.createBlogArticle(user, data)
     }
@@ -31,12 +31,12 @@ export default class ArticleController {
 
     async deleteBlogArticle({request}: HttpContext){
         let {id} = request.params()
-        let user = request['user']
+        let user = request.user
         return await this.blogService.deleteBlogArticle(id, user.id)
     }
 
     async getUserArticle({request}: HttpContext){
-        const user = request['user']
+        const user = request.user
         return await this.blogService.getUserArticles(user)
     }
 

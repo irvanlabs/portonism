@@ -26,6 +26,18 @@ export class NotFoundException extends Exception {
     }
 }
 
+export class ForbiddenException extends Exception {
+    static status = 403;
+    async handle(error: this, ctx: HttpContext) {
+        let message = {
+            message: this.message,
+            code: this.status,
+            exception: this.name
+        }
+      ctx.response.status(error.status).send(message)
+    }
+}
+
 export class UnauthorizedException extends Exception {
     static status = 401;
     async handle(error: this, ctx: HttpContext) {

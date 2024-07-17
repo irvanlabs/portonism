@@ -10,3 +10,24 @@ export const createUserValidator = vine.compile(
 );
 
 
+export const updateUserValidator = vine.compile(
+    vine.object({
+        username: vine.string().trim().optional(),
+        fullname: vine.string().trim().optional(),
+        email: vine.string().email().optional(),
+        phone_number: vine.string().trim().optional(),
+        password: vine.string().optional(),
+        password_confirmation: vine.string().optional(),
+    })
+);
+
+
+export const resetPasswordValidator = vine.compile(
+    vine.object({
+        password: vine.string().optional(),
+        password_confirmation: vine.string().optional(),
+    })
+);
+
+
+

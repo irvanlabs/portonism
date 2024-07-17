@@ -14,7 +14,7 @@ export default class LinksController {
 
     async create({request}: HttpContext){ 
         const {slug, url} = await request.validateUsing(createLinkValidator)
-        return await this.linkService.createShortlink(slug, url, request['user'])
+        return await this.linkService.createShortlink(slug, url, request.user)
     }
 
     async get({request}: HttpContext){
