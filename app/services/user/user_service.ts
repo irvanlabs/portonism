@@ -1,4 +1,4 @@
-import { CreateUserDTO, LoginUserDTO, resetPasswordDTO, updateUserDTO } from "./user_dto.js"
+import { CreateUserDTO, LoginUserDTO, resetPasswordDTO, updateUserDTO, userDTO } from "./user_dto.js"
 import { BadRequestException, UnauthorizedException } from "#exceptions/exceptions"
 import hash from '@adonisjs/core/services/hash'
 import User from "#models/user_model"
@@ -8,12 +8,14 @@ import { inject } from "@adonisjs/core"
 import  ProfileService from "#services/profile/profile_service"
 import UserPlan from "#models/user_plan_model"
 import { DateTime } from "luxon"
+import EmailVerificationService from "#services/verification/email_verification_service"
 
 @inject()
 export default class UserService{
     
     constructor(
-        private profileService: ProfileService
+        private profileService: ProfileService,
+        private emailVerificationService: EmailVerificationService
     ){}
 
     async getUser(email){
@@ -35,13 +37,15 @@ export default class UserService{
             id: users.id, 
             email: users.email, 
             roleId: users.roleId, 
-            roles: [roles]
+            roles: [roles],
+            email_verified: users.isEmailVerified,
+            phone_verified: users.isPhoneVerified
         }
 
         return payload
     }
 
-    async getUserById(user_id: number){
+    async getUserById(user_id: number): Promise<User>{
         let user = await User.findByOrFail({
             id: user_id
         })
@@ -150,6 +154,10 @@ export default class UserService{
 
         await user.save()
         return user;
+    }
+
+    async verifyEmail(user: userDTO){
+        return await this.emailVerificationService.generateVerification(user)
     }
 
 }

@@ -30,6 +30,8 @@ export class userDTO {
     email!: string
     roleId!: number
     roles!: string[]
+    email_verified!: boolean
+    phone_verified!: boolean
     iat!: number
     exp!: number
 }

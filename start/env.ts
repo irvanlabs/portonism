@@ -30,5 +30,21 @@ export default await Env.create(new URL('../', import.meta.url), {
   DB_DATABASE: Env.schema.string(),
   DATABASE_URL: Env.schema.string(),
 
-  JWT_SECRET_KEY: Env.schema.string()
+  /*  
+  
+  APP ENV variables
+
+  */
+  APP_URL: Env.schema.string(),
+  APP_NAME: Env.schema.string(),
+  APP_STATIC_URL: Env.schema.string(),
+  JWT_SECRET_KEY: Env.schema.string(),
+  MAIL_FROM_ADDRESS: Env.schema.string(),
+
+  /*
+  |----------------------------------------------------------
+  | Variables for configuring the mail package
+  |----------------------------------------------------------
+  */
+  RESEND_API_KEY: Env.schema.string()
 })
