@@ -26,6 +26,9 @@ export default class User extends BaseModel {
   declare email: string
 
   @column()
+  declare avatarUrl: string
+
+  @column()
   declare password: string
 
   @column()
@@ -35,13 +38,14 @@ export default class User extends BaseModel {
   declare phoneNumber: string
 
   @column()
+  declare uuid: string
+
+  @column()
   declare isEmailVerified: boolean
 
   @column()
   declare isPhoneVerified: boolean
 
-  @column()
-  declare uuid: string
 
   @belongsTo(() => Role)
   declare role: BelongsTo<typeof Role>

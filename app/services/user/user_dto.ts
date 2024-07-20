@@ -1,3 +1,5 @@
+import { MultipartFile } from "@adonisjs/core/bodyparser";
+
 export class CreateUserDTO {
     fullname!: string;
     email!: string;
@@ -10,6 +12,7 @@ export class updateUserDTO {
     username?: string;
     fullname?: string;
     email?: string;
+    avatar?: MultipartFile;
     phone_number?: string;
     password?: string;
     password_confirmation?: string;

@@ -17,7 +17,6 @@ export default class ProfilesController {
 
     async getMyprofile({request}: HttpContext){
         let user_id = request.user.id
-        console.log(request.user)
         return await this.profileService.getMyProfile(user_id);
     }
 

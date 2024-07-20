@@ -15,6 +15,10 @@ export const updateUserValidator = vine.compile(
         username: vine.string().trim().optional(),
         fullname: vine.string().trim().optional(),
         email: vine.string().email().optional(),
+        avatar: vine.file({
+            size: '5mb',
+            extnames: ['jpg', 'png', 'jpeg']
+        }),
         phone_number: vine.string().trim().optional(),
         password: vine.string().optional(),
         password_confirmation: vine.string().optional(),

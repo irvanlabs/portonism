@@ -23,10 +23,10 @@ export default class Article extends BaseModel {
   declare published: boolean
 
   @column()
-  declare authorId: number
+  declare userId: number
 
   @belongsTo(() => User)
-  declare author: BelongsTo<typeof User>
+  declare user: BelongsTo<typeof User>
 
   @manyToMany(() => ArticleCategory, {
     pivotTable: 'article_category_article',

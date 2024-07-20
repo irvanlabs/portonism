@@ -38,6 +38,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   APP_URL: Env.schema.string(),
   APP_NAME: Env.schema.string(),
   APP_STATIC_URL: Env.schema.string(),
+  APP_PUBLIC_PATH: Env.schema.string(),
   JWT_SECRET_KEY: Env.schema.string(),
   MAIL_FROM_ADDRESS: Env.schema.string(),
 

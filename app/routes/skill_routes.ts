@@ -1,4 +1,4 @@
-import SkillsController from "#controllers/skills_controller";
+import SkillsController from "#controllers/skill/skills_controller";
 import { middleware } from "#start/kernel";
 import router from "@adonisjs/core/services/router";
 

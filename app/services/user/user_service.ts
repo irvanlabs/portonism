@@ -9,6 +9,10 @@ import  ProfileService from "#services/profile/profile_service"
 import UserPlan from "#models/user_plan_model"
 import { DateTime } from "luxon"
 import EmailVerificationService from "#services/verification/email_verification_service"
+import { getGravatarUrl } from "../../utils/generate_gravatar.js"
+import app from "@adonisjs/core/services/app"
+import { cuid } from "@adonisjs/core/helpers"
+import env from "#start/env"
 
 @inject()
 export default class UserService{
@@ -69,6 +73,7 @@ export default class UserService{
                     username: data.email.split('@')[0],
                     fullname: data.fullname,
                     uuid: uuidTrimmed,
+                    avatarUrl: getGravatarUrl(data.email)
             });
             await this.profileService.createProfile(user.id)
 
@@ -95,6 +100,12 @@ export default class UserService{
             throw new BadRequestException('Failed, Password Confirmation Missmatch')
         } 
 
+        let avatar = data.avatar
+
+        await avatar?.move(app.makePath(`${env.get('APP_PUBLIC_PATH')}/image/avatar`), {
+            name: `${cuid()}.${avatar.extname}`
+        })
+
         let hashed = data.password ?  await hash.make(data.password) : ''
         user.merge({
             fullname: data.fullname,
@@ -103,7 +114,8 @@ export default class UserService{
             password: hashed ? hashed : user.password,
             phoneNumber: data.phone_number,
             isEmailVerified: (data.email && data.email === user.email) ? user.isEmailVerified : false,
-            isPhoneVerified: (data.phone_number && data.phone_number === user.phoneNumber) ? user.isPhoneVerified : false
+            isPhoneVerified: (data.phone_number && data.phone_number === user.phoneNumber) ? user.isPhoneVerified : false,
+            avatarUrl: avatar?.fileName,
           });
 
         user.save()
@@ -158,6 +170,19 @@ export default class UserService{
 
     async verifyEmail(user: userDTO){
         return await this.emailVerificationService.generateVerification(user)
+    }
+
+    async getUserPortos(uuid: string){
+        let userPortos = await User.query()
+        .preload('articles')
+        .preload('profiles')
+        .preload('projects')
+        .preload('skills')
+        .preload('experiences')
+        .preload('educations')
+        .where('uuid', uuid)
+        .firstOrFail()
+        return userPortos
     }
 
 }
