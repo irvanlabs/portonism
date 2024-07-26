@@ -13,13 +13,16 @@ import { getGravatarUrl } from "../../utils/generate_gravatar.js"
 import app from "@adonisjs/core/services/app"
 import { cuid } from "@adonisjs/core/helpers"
 import env from "#start/env"
+import UserSiteConfigService from "#services/site/user_site_config_service"
+import { generateCname } from "../../utils/generate_cname.js"
 
 @inject()
 export default class UserService{
     
     constructor(
         private profileService: ProfileService,
-        private emailVerificationService: EmailVerificationService
+        private emailVerificationService: EmailVerificationService,
+        private userSiteConfigService: UserSiteConfigService
     ){}
 
     async getUser(email){
@@ -83,7 +86,12 @@ export default class UserService{
                 userId: user.id,
                 planId: 1,
                 expiredAt: expiry
-            })            
+            })
+
+            let userSite = {
+                site_url: data.fullname.split(' ')[0]+ generateCname(10)
+            }
+            await this.userSiteConfigService.createUserSite(user.id, userSite)            
             return user
         } catch(e: any){
             console.log(e)
