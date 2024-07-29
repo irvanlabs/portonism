@@ -10,4 +10,8 @@ export default class PortosService{
     async getPortosSPA(uuid: string){
         return await this.userService.getUserPortos(uuid)
     }
+
+    async getPortosSPAByOrigin(origin: string){
+        return await this.userService.getUserPortosByOrigin(origin)
+    }
 }

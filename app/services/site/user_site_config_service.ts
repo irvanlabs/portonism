@@ -9,7 +9,7 @@ export default class UserSiteConfigService{
             userId: user_id,
             siteUrl: data.site_url,
             canonicalName: cname,
-            themeId: data.themeId ? data.themeId : 1
+            themeId: data.theme_id ? data.theme_id : 1
         })
         return config;
     }
@@ -21,7 +21,7 @@ export default class UserSiteConfigService{
 
         updateConfig.merge({
             siteUrl: data.site_url,
-            themeId: data.themeId,
+            themeId: data.theme_id,
         })
 
         await updateConfig.save()

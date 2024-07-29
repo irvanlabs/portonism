@@ -9,9 +9,14 @@ export default class PortosController {
         private portosService: PortosService
     ){}
 
-    async getPortosSPA({request}:HttpContext){
+    async getPortosSPAByUUID({request}:HttpContext){
         let data = request.params()
         let {uuid} = await getUserPortos.validate(data)
         return await this.portosService.getPortosSPA(uuid)
+    }
+
+    async getPortosByOrigin({request}:HttpContext){
+        let origin = request.header('X-Origin')
+        return await this.portosService.getPortosSPAByOrigin(String(origin))
     }
 }

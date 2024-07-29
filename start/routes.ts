@@ -21,6 +21,8 @@ import { PlanRoutes } from '../app/routes/plan_routes.js';
 import { RolesRoutes } from '../app/routes/role_routes.js';
 import { EmailVerificationRoutes } from '../app/routes/email_verification_routes.js';
 import { PortofolioRoutes } from '../app/routes/portofolio_routes.js';
+import { ConfigRoutes } from '../app/routes/config_routes.js';
+import { SiteThemesRouter } from '../app/routes/site_theme_routes.js';
 
 router.get('/', async () => {
   return {
@@ -42,4 +44,6 @@ router.group(()=>{
   RolesRoutes();
   EmailVerificationRoutes();
   PortofolioRoutes();
+  ConfigRoutes();
+  SiteThemesRouter();
 }).prefix('/api');

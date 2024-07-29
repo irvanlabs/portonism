@@ -15,6 +15,7 @@ import { cuid } from "@adonisjs/core/helpers"
 import env from "#start/env"
 import UserSiteConfigService from "#services/site/user_site_config_service"
 import { generateCname } from "../../utils/generate_cname.js"
+import UserSiteConfig from "#models/user_site_config_model"
 
 @inject()
 export default class UserService{
@@ -189,6 +190,20 @@ export default class UserService{
         .preload('experiences')
         .preload('educations')
         .where('uuid', uuid)
+        .firstOrFail()
+        return userPortos
+    }
+
+    async getUserPortosByOrigin(origin: string){
+        let parseDomain = await UserSiteConfig.findByOrFail({siteUrl: origin, canonicalName: origin})
+        let userPortos = await User.query()
+        .preload('articles')
+        .preload('profiles')
+        .preload('projects')
+        .preload('skills')
+        .preload('experiences')
+        .preload('educations')
+        .where('id', parseDomain.userId)
         .firstOrFail()
         return userPortos
     }

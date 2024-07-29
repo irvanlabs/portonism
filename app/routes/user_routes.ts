@@ -1,6 +1,7 @@
 import UsersController from "#controllers/user/users_controller"
 import { middleware } from "#start/kernel"
 import router from "@adonisjs/core/services/router"
+import { UserSiteConfigRoutes } from "./site_config_routes.js"
 
   // USER routes
 export const UserRoutes = () =>{
@@ -11,5 +12,8 @@ export const UserRoutes = () =>{
         router.put('/update', [UsersController, 'update']).use(middleware.auth())
         router.put('/password-reset', [UsersController, 'passwordChange']).use(middleware.auth())
         router.post('/email-verification', [UsersController, 'emailVerification']).use(middleware.auth())
+
+        //Site Config
+        UserSiteConfigRoutes()
     }).prefix('/user') 
 }
